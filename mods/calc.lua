@@ -77,3 +77,10 @@ local function parse(data)
   return result
 end
  
+ local function handleCommand(message, user,channel)
+   local result = user.nick .. ", " .. tostring(parse(message))
+   API.irc:sendChat(channel, result)
+ end
+ 
+ API.registerCommand(":calc", handleCommand)
+ 
