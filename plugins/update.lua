@@ -39,4 +39,6 @@ end
 hook.new("command_reload", reload)
 
 hook.new("command_unsafestop", function() os.exit() end)
+
+hook.new("command_restart", function() os.execute("nohup lua main.lua &") os.exit() end)
   
