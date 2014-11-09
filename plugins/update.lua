@@ -18,7 +18,6 @@ hook.new("command_git", handleGit)
 local function reload(message, user, channel)
   
   local pack = message:match'^%s*(.*%S)'
-  hook.irc:sendChat(channel, message .. "  " .. pack)
   if not pack then
     return "You must specify package name"
   end
