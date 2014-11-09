@@ -10,7 +10,6 @@ end
 
 local function handleGit(message, user, channel)
   if message:find("^pull") then
-    print("Pulling.")
     return table.concat(build(io.popen("git pull"):lines()), ", ")
   end
 end
@@ -19,6 +18,7 @@ hook.new("command_git", handleGit)
 local function reload(message, user, channel)
   
   local pack = message:match'^%s*(.*%S)'
+  hook.irc:sendChat(channel, message .. "  " .. pack)
   if not pack then
     return "You must specify package name"
   end
