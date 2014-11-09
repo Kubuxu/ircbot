@@ -13,7 +13,6 @@ local function handleCommands(user, channel, message)
   
   local message = message:sub(2)
   cmd = message:gsub(" .+$", "")
-  print(message, cmd)
   if hooks["command_"..cmd] then
     local _, res = pcall(hooks["command_"..cmd].handler,message:gsub(cmd.." ",""),user, channel)
     if res ~= nil then
