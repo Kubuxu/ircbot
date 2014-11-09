@@ -1,22 +1,11 @@
 local hook = require "hook"
 
-local function build(build_fn, iterator_fn, state, ...)
-    build_fn = (
-            build_fn
-        or  function(arg)
-                return arg
-            end
-    )
-    local res, res_i = {}, 1
-    local vars = {...}
-    while true do
-        vars = {iterator_fn(state, vars[1])}
-        if vars[1] == nil then break end
-        --build_fn(unpack(vars)) -- see http://trac.caspring.org/wiki/LuaPerformance : TEST 3
-        res[res_i] = build_fn(vars)
-        res_i = res_i+1
-    end
-    return res
+local function build(...)
+  local arr = {}
+  for v in ... do
+    arr[#arr + 1] = v
+  end
+  return arr
 end
 
 local function handleGit(message, user, channel)
@@ -28,6 +17,7 @@ end
 hook.new("command_git", handleGit)
 
 local function reload(message, user, channel)
+  
   local pack = message:match'^%s*(.*%S)'
   if not pack then
     return "You must specify package name"
