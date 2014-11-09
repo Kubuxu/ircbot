@@ -20,13 +20,13 @@ local function solve(fun,options)
   
   local maxi = options.maxi or 200
   local i = 2
-  while i < maxi and fun(x[i]) ~= fun(x[i-1]) do
+  while i < maxi and fun(x[i]) == fun(x[i]) and  fun(x[i]) ~= fun(x[i-1]) do
     i = i + 1
     x[i] = x[i-1] - fun(x[i-1]) * (x[i-1] - x[i-2]) / (fun(x[i-1]) - fun(x[i-2]))
     print(x[i],x[i-1],fun(x[i]),fun(x[i-1]))
   end
     print(x[i])
-  if i == maxi and not options.force then
+  if (fun(x[i]) ~= fun(x[i]) or i == maxi) and not options.force then
     error "I'am not complex enough."
   end
   
