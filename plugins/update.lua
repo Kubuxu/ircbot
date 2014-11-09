@@ -21,6 +21,7 @@ end
 
 local function handleGit(message, user, channel)
   if message:find("^pull") then
+    print("Pulling.")
     return table.concat(build(io.popen("git pull"):lines()), ", ")
   end
 end
