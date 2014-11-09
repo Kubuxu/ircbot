@@ -37,4 +37,6 @@ local function reload(message, user, channel)
 end
 
 hook.new("command_reload", reload)
+
+hook.new("command_unsafestop", function() os.exit() end)
   
