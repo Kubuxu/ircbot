@@ -40,5 +40,5 @@ hook.new("command_reload", reload)
 
 hook.new("command_unsafestop", function() os.exit() end)
 
-hook.new("command_restart", function() os.execute("nohup lua main.lua &") os.exit() end)
+hook.new("command_restart", function() io.popen("sleep 5 && nohup lua main.lua &") hook.irc:disconnect() os.exit() end)
   
