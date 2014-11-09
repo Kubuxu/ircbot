@@ -25,6 +25,7 @@ local function reload(message, user, channel)
   if package.loaded[pack] then
     res = res .. "Unloading " .. pack .. "\n"
     _ = type(package.loaded[pack]) == "table" and package.loaded[pack].uninit and package.loaded[pack].uninit()
+    package.loaded[pack] = nil
   end
   res = res .. "Loading " .. pack .. "\n"
   local worked, message = pcall(require,pack)
