@@ -27,7 +27,10 @@ local function solve(fun,options)
   end
     print(x[i])
   if (fun(x[i]) ~= fun(x[i]) or i == maxi) and not options.force then
-    error "I'am not complex enough."
+    return "I'am not complex enough."
+  end
+  if fun(x[i]) ~= 0 then
+    return "There is no such number. Try do it by hand..."
   end
   
   return x[i]  
