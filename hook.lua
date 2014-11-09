@@ -15,7 +15,7 @@ local function handleCommands(user, channel, message)
   cmd = message:gsub(" .+$", "")
   print(message, cmd)
   if hooks["command_"..cmd] then
-    local res = hooks["command_"..cmd].handler(message:gsub(cmd.." ",""),user, channel)
+    local _, res = pcall(hooks["command_"..cmd].handler,message:gsub(cmd.." ",""),user, channel)
     if res ~= nil then
       hook.irc:sendChat(channel, user.nick..", ".. tostring(res))
     end
