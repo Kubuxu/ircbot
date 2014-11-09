@@ -15,8 +15,8 @@ local function solve(fun,options)
   
   
   local x = {}
-  x[1] = options.guess1 or math.random()
-  x[2] = options.guess2 or math.random()
+  x[1] = options.guess1 or 0.1
+  x[2] = options.guess2 or 0.9
   
   local maxi = options.maxi or 200
   local i = 2
