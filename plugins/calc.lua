@@ -1,3 +1,4 @@
+local hook = require "hook"
 local function solve(fun,options)
   
   local options = options or {}
@@ -78,9 +79,8 @@ local function parse(data)
 end
  
  local function handleCommand(message, user,channel)
-   local result = user.nick .. ", " .. tostring(parse(message))
-   API.irc:sendChat(channel, result)
+   return parse(message)
  end
  
- API.registerCommand(":calc", handleCommand)
+ hook.new("command_calc", handleCommand)
  

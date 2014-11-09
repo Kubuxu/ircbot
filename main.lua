@@ -1,12 +1,17 @@
-require "irc"
 
-API = require "API"
+local oldpath = package.path
+
+package.path = "./?/?.lua;./?/init.lua;" .. package.path
+require "irc"
+package.path = oldpath
+
+hook = require "hook"
 
 local sleep = require "socket".sleep
 
 local c = irc.new{nick = "ThatBot"}
 
-API.setIRC(c)
+hook.setIRC(c)
 
 pcall(require,"lfs") 
 if not lfs then
@@ -17,9 +22,9 @@ if not lfs then
   end
 end
 
-local modsdir = "./mods"
+local modsdir = "./plugins"
 package.path = ("lualibs/?.lua;lualibs/?/?.lua;lualibs/?/init.lua;lualibs/?/?/?.lua;lualibs/?/?/init.lua;"):gsub("lualibs",modsdir) .. package.path
-for mod in lfs.dir("mods") do
+for mod in lfs.dir(modsdir) do
   mod = mod:gsub("%.lua$","")
   print(mod)
   print(pcall(require, mod))
