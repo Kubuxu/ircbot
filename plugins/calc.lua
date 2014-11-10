@@ -1,4 +1,22 @@
 local hook = require "hook"
+
+local ENV_MATH = {}
+for i, v in pairs(math) do
+    ENV_MATH[i] = v
+  end
+for i, v in pairs(bit32) do
+  ENV_MATH[i] = v
+end
+
+function getMathENV()
+  local res = {}
+  for i,v in ENV_MATH do
+    res[i]=v
+  end
+end
+
+  
+
 local function solve(fun,options)
   
   local options = options or {}
@@ -47,7 +65,7 @@ local function eval(data)
   end 
   
   
-  local fun, valid = load(" return (".. data .. ") ",nil,"t",ENV_MATH)
+  local fun, valid = load(" return (".. data .. ") ",nil,"t",getMathENV())
   if not fun then
     return valid
   end
@@ -60,6 +78,11 @@ end
 
 
 local function parse(data)
+  
+  data = data:gsub("%Ax", function(cap) return cap:sub(1,1) .. "(x)" end)
+  data = data:gsub("x%A", function(cap) return "(x)" .. cap:sub(2,2) end)
+  data = data:gsub("%)%(",")*(")
+  
   local ready, n = data:gsub("=(.-)$"," -(%1)")
   if n == 0 then
     return eval(ready)
@@ -69,7 +92,7 @@ local function parse(data)
     ENV_MATH[i] = v
   end
   print(ready)
-  local fun, valid = load("return function(x) return (".. ready .. ") end",nil,"t",ENV_MATH)
+  local fun, valid = load("return function(x) return (".. ready .. ") end",nil,"t",getMathENV())
   if not fun then
     return valid
   end
