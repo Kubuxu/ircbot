@@ -1,12 +1,14 @@
 local hook = require "hook"
 
 local ENV_MATH = {}
+
 for i, v in pairs(math) do
     ENV_MATH[i] = v
   end
 for i, v in pairs(bit32) do
   ENV_MATH[i] = v
 end
+ENV_MATH._G = ENV_MATH
 
 function getMathENV()
   local res = {}
