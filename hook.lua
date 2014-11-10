@@ -7,7 +7,7 @@ local hooks = {}
 
 local function handleCommands(user, channel, message)
 
-  if not message:sub(1,1) == ":" then
+  if message:sub(1,1) ~= ":" then
     return
   end
   
