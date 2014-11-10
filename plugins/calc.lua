@@ -44,11 +44,8 @@ local function solve(fun,options)
     print(x[i],x[i-1],fun(x[i]),fun(x[i-1]))
   end
     print(x[i])
-  if (fun(x[i]) ~= fun(x[i]) or i == maxi) and not options.force then
-    return "I'am not complex enough."
-  end
-  if fun(x[i]) ~= 0 then
-    return "There is no such number. Try do it by hand..."
+  if (fun(x[i]) ~= fun(x[i]) or i == maxi or fun(x[i]) ~= 0) and not options.force then
+    return "I'am not complex enough. Try calculate it by hand..."
   end
   
   return x[i]  
