@@ -10,7 +10,7 @@ end
 
 function getMathENV()
   local res = {}
-  for i,v in ENV_MATH do
+  for i,v in pairs(ENV_MATH) do
     res[i]=v
   end
 end
