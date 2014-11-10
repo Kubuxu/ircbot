@@ -8,13 +8,14 @@ for i, v in pairs(math) do
 for i, v in pairs(bit32) do
   ENV_MATH[i] = v
 end
-ENV_MATH._G = ENV_MATH
+--ENV_MATH._G = ENV_MATH
 
 function getMathENV()
   local res = {}
   for i,v in pairs(ENV_MATH) do
     res[i]=v
   end
+  return res
 end
 
   
