@@ -78,9 +78,6 @@ end
 
 
 local function parse(data)
-  
-  data = data:gsub("%Ax%a", function(cap) return cap:sub(1,1) .. "(x)" end)
-  data = data:gsub("^x%a", function(cap) return "(x)" .. cap:sub(2,2) end)
   data = data:gsub("%)%(",")*(")
   
   local ready, n = data:gsub("=(.-)$"," -(%1)")
