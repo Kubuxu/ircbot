@@ -1,8 +1,10 @@
+require "logging.file"
 local hook = {}
 
 
 hook.irc = nil
-
+hook.log = logging.file("ircbot-%s.log")
+hook.log:setLevel(logging.INFO)
 local hooks = {}
 
 local function handleCommands(user, channel, message)
@@ -24,7 +26,7 @@ end
 
 
 local function chatHook(user, channel, message)
-  print("#"..channel, ("<%s>"):format(user.nick), message)
+  hook.log:info("#"..channel, ("<%s>"):format(user.nick), message)
   handleCommands(user, channel, message)
    
 end
