@@ -3,7 +3,7 @@ local hook = {}
 
 
 hook.irc = nil
-hook.log = logging.file("ircbot-%s.log")
+hook.log = logging.file("ircbot-%s.log", "%Y-%m-%d")
 hook.log:setLevel(logging.INFO)
 local hooks = {}
 
