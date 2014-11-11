@@ -24,6 +24,7 @@ end
 
 
 local function chatHook(user, channel, message)
+  print("#"..channel, ("<%s>"):format(user.nick), message)
   handleCommands(user, channel, message)
    
 end

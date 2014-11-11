@@ -43,9 +43,9 @@ local function solve(fun,options)
   while i < maxi and fun(x[i]) == fun(x[i]) and  fun(x[i]) ~= fun(x[i-1]) do
     i = i + 1
     x[i] = x[i-1] - fun(x[i-1]) * (x[i-1] - x[i-2]) / (fun(x[i-1]) - fun(x[i-2]))
-    print(x[i],x[i-1],fun(x[i]),fun(x[i-1]))
+    --print(x[i],x[i-1],fun(x[i]),fun(x[i-1]))
   end
-    print(x[i])
+    --print(x[i])
   if (fun(x[i]) ~= fun(x[i]) or i == maxi or fun(x[i]) ~= 0) and not options.force then
     return "I'am not complex enough. Try calculate it by hand..."
   end
