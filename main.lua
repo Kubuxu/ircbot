@@ -3,7 +3,6 @@ local oldpath = package.path
 
 package.path = "./?/?.lua;./?/init.lua;" .. package.path
 require "irc"
-package.path = oldpath
 
 hook = require "hook"
 
