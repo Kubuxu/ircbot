@@ -26,7 +26,7 @@ end
 
 
 local function chatHook(user, channel, message)
-  hook.log:info("#"..channel, ("<%s>"):format(user.nick), message)
+  hook.log:info(("%s %s: %s"):format(channel,("<%s>"):format(user.nick),message))
   handleCommands(user, channel, message)
    
 end
