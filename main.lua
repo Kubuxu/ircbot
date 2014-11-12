@@ -34,7 +34,7 @@ end
 
 c:connect("irc.esper.net")
 if args[1] then
-  c:sendChat("NickServ", "identify " .. args[1]
+  c:sendChat("NickServ", "identify " .. args[1])
 end
 sleep(500)
 c:join("#Starchasers")

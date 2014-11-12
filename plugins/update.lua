@@ -33,6 +33,7 @@ local function reload(message, user, channel)
   if not worked then
     res = res .. message
   end
+  res = res .. "Loaded " .. pack .. "\n"
   return res
 end
 
