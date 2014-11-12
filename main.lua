@@ -38,7 +38,7 @@ if args[1] then
 end
 sleep(1)
 c:join("#Starchasers")
-
+c:join("#ocbots")
 while true do
   c:think()
   sleep(0.5)
