@@ -45,6 +45,13 @@ function meta:sendNotice(target, msg)
 	end
 end
 
+function meta:sendAction(target, msg)
+	-- Split the message into segments if it includes newlines.
+	for line in msg:gmatch("([^\r\n]+)") do
+		self:send("PRIVMSG %s :\1ACTION%s\1", verify(target, 3), line)
+	end
+end
+
 function meta:join(channel, key)
 	if key then
 		self:send("JOIN %s :%s", verify(channel, 3), verify(key, 3))
