@@ -102,7 +102,7 @@ BASE_ENV.pcall = function(f, ...)
   if not result[1] and result[2]:find("^Quota exceeded:") then
     error(result[2])
   end
-  return result:unpack()
+  return table.unpack(result)
 end
 
 BASE_ENV.xpcall = function(f, msgh, ...)
