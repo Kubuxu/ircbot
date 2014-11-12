@@ -100,7 +100,7 @@ end)
 BASE_ENV.pcall = function(f, ...)
   local result = table.pack(pcall(f, ...))
   if (not result[1]) and result[2]:find("Quota exceeded:") then
-    error(result[2])
+    error(result[2],0)
   end
   return table.unpack(result)
 end
@@ -108,7 +108,7 @@ end
 BASE_ENV.xpcall = function(f, msgh, ...)
   return xpcall(f, function(msg)
     if msg:find("Quota exceeded:") then
-      error(msg)
+      error(msg,0)
     end
     return msgh(msg)
   end, ...)
