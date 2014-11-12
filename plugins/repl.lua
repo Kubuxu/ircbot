@@ -18,4 +18,4 @@ local function input(message, user, channel)
   return result
 end
 
-hook:new("command_>", input)
+hook:new("command_repl", input)
