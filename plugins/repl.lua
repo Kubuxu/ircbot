@@ -35,7 +35,7 @@ local function handle(message, user, channel)
     return res:sub(1,-3)
   end
   
-  return table.unpack(result)
+  return table.unpack(result,2)
 end
 
 hook.new("command_>", handle)

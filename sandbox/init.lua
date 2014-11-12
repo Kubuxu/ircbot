@@ -172,7 +172,7 @@ function sandbox.protect(f, options)
     cleanup()
 
     if not result[1] then error(result[2]) end
-    return table.unpack(result)
+    return table.unpack(result,2)
   end
 end
 
