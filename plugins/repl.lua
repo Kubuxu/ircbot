@@ -12,7 +12,7 @@ local function handle(message, user, channel)
   
   local env = envs[user.nick] or {}
   
-  local message = message:gsum("^=", "return ") 
+  local message = message:gsub("^%s*=", "return ") 
   
   local ok, result =  pcall(sandbox(message))
   return result
