@@ -47,8 +47,10 @@ function hook.new(names, handler, accessLevel)
 end
 
 function hook.auth(user)
-  user.access = user.access or hook.irc:whois(user.nick).access
-  return (user.access.op or user.access.halfop)
+  if(user.access.op == nil) then
+    hook.irc:whois(user.nick)
+  end
+ return (user.access.op or user.access.halfop)
 end
 
 
