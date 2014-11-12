@@ -10,8 +10,9 @@ local function handle(message, user, channel)
     return "Nope"
   end
  
-  local env = envs[user.nick] or {}
-  hook.irc:sendChat(channel,env.test or "test")
+  envs[user.nick] = envs[user.nick] or {}
+  local env = envs[user.nick]
+
   local message = message:gsub("^%s*=", "return ") 
   
   local ok, result =  pcall(sandbox(message,{[env] = env}))
