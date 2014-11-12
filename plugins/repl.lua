@@ -24,10 +24,10 @@ local function handle(message, user, channel)
     for v in result do
       res = res .. tostring(v) .. ", "
       if res:len() > 1024 then
-        return res
+        return res .. "..."
       end
     end
-    return res
+    return res:sub(1,-2)
   end
   
   return result
