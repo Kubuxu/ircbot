@@ -47,14 +47,13 @@ function hook.new(names, handler, accessLevel)
 end
 
 function hook.auth(user)
-  return true
-  --FIXME
   
-  if(user.access.op == nil) then
+
+  if false and (user.access.op == nil) then
     hook.irc:whois(user.nick)
   end
-  print(user.access.op, user.access.halfop)
- return (user.access.op or user.access.halfop)
+  --print(user.access.op, user.access.halfop)
+ return true --(user.access.op or user.access.halfop)
 end
 
 
