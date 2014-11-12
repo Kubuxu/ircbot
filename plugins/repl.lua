@@ -5,6 +5,7 @@ local sandbox = require "sandbox"
 local envs = {}
 
 local function input(message, user, channel)
+  print("Working")
   if not hook.auth(user) then
     return "Nope"
   end
