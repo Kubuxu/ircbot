@@ -10,10 +10,13 @@ local hooks = {}
 
 local function str(tab)
   local res = ""
-  for _, v in ipairs(tab) do
-    res = res .. tostring(v) .. "  "
+  tab[2] = tab[2] or "nil"
+  for i, v in ipairs(tab) do
+    if i ~= 1 then
+      res = res .. tostring(v) .. "  "
+    end
   end
-  return res:sub(1,-3)
+  return res:gsub("  $","")
 end
 
 local function handleCommands(user, channel, message)
