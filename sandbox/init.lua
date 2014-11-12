@@ -107,12 +107,11 @@ end
 
 BASE_ENV.xpcall = function(f, msgh, ...)
   return xpcall(f, function(msg)
-      if msg:find("Quota exceeded:") then
-        error(msg)
-      end
-      return msgh(msg)
-    end, ...)
-  end
+    if msg:find("Quota exceeded:") then
+      error(msg)
+    end
+    return msgh(msg)
+  end, ...)
 end
 
 
