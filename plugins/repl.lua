@@ -14,7 +14,7 @@ local function handle(message, user, channel)
   
   local message = message:gsub("^%s*=", "return ") 
   
-  local ok, result =  pcall(sandbox(message,{"env" = env}))
+  local ok, result =  pcall(sandbox(message,{[env] = env}))
   return result
 end
 
