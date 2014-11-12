@@ -167,12 +167,12 @@ function sandbox.protect(f, options)
     end
 
 
-    local ok, result = pcall(f, ...)
+    local result = table.pack(pcall(f, ...))
 
     cleanup()
 
-    if not ok then error(result) end
-    return result
+    if not result[1] then error(result[2]) end
+    return table.unpack(result)
   end
 end
 

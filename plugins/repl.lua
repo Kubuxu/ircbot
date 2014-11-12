@@ -20,13 +20,13 @@ local function handle(message, user, channel)
 
   local message = message:gsub("^%s*=", "return ") 
   
-  local ok, result =  pcall(sandbox(message,{["env"] = env}))
+  local  result = table.pack(pcall(sandbox(message,{["env"] = env})))
   
-  if not ok then
-    return result
-  elseif type(result)=="function"then
+  if not result[1] then
+    return result[2]
+  elseif type(result[2])=="function"then
     local res = ""
-    for v in result do
+    for v in result[2] do
       res = res .. tostring(v) .. ", "
       if res:len() > 1024 then
         return res .. "..."
