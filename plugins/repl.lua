@@ -17,6 +17,7 @@ local function handle(message, user, channel)
     setmetatable(env, {["__mode"] = "k"})
   end
 
+
   local message = message:gsub("^%s*=", "return ") 
   
   local ok, result =  pcall(sandbox(message,{["env"] = env}))
