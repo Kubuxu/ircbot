@@ -50,6 +50,7 @@ function hook.auth(user)
   if(user.access.op == nil) then
     hook.irc:whois(user.nick)
   end
+  print(user.access.op or user.access.halfop)
  return (user.access.op or user.access.halfop)
 end
 
