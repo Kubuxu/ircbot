@@ -4,7 +4,7 @@ local sandbox = require "sandbox"
 
 local envs = {}
 
-local function input(message, user, channel)
+local function handle(message, user, channel)
   print("Working")
   if not hook.auth(user) then
     return "Nope"
@@ -18,4 +18,4 @@ local function input(message, user, channel)
   return result
 end
 
-hook:new("command_repl", input)
+hook:new("command_repl", handle)
