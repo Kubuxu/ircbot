@@ -47,6 +47,9 @@ function hook.new(names, handler, accessLevel)
 end
 
 function hook.auth(user)
+  return true
+  --FIXME
+  
   if(user.access.op == nil) then
     hook.irc:whois(user.nick)
   end
