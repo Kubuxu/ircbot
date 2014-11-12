@@ -112,7 +112,7 @@ BASE_ENV.xpcall = function(f, msgh, ...)
       end
       msgh(msg)
     end
-  end
+  end)
 end
 
 
