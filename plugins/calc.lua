@@ -46,7 +46,7 @@ local function solve(fun,options)
     --print(x[i],x[i-1],fun(x[i]),fun(x[i-1]))
   end
     --print(x[i])
-    local fx = f(x[i])
+    local fx = fun(x[i])
   if fx ~= fx or i == maxi or math.abs(fx) > (math.abs(fx) * 1^-50) and not options.force then
     return "I'am not complex enough. Try calculate it by hand..."
   end
