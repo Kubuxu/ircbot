@@ -18,12 +18,19 @@ local function handleCommands(user, channel, message)
   if hooks["command_"..cmd] then
     local res = table.pack(pcall(hooks["command_"..cmd].handler,message:gsub(cmd.." ",""),user, channel))
     if res[2] ~= nil then
-      hook.irc:sendChat(channel, user.nick..", ".. table.concat(res," ",2):gsub("[\n\r]+"," | "))
+      hook.irc:sendChat(channel, user.nick..", ".. str(table):gsub("[\n\r]+"," | "))
     end
   end
   
 end
 
+local function str(tab)
+  local res = ""
+  for _, v in ipairs(tab) do
+    res = res .. tostring(v) .. "  "
+  end
+  return res:sub(1,-3)
+end
 
 local function chatHook(user, channel, message)
   hook.log:info(("%s %s: %s"):format(channel,("<%s>"):format(user.nick),message))
