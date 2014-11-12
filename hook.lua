@@ -7,6 +7,15 @@ hook.log = logging.file("ircbot-%s.log", "%Y-%m-%d")
 hook.log:setLevel(logging.INFO)
 local hooks = {}
 
+
+local function str(tab)
+  local res = ""
+  for _, v in ipairs(tab) do
+    res = res .. tostring(v) .. "  "
+  end
+  return res:sub(1,-3)
+end
+
 local function handleCommands(user, channel, message)
 
   if message:sub(1,1) ~= ":" then
@@ -24,13 +33,6 @@ local function handleCommands(user, channel, message)
   
 end
 
-local function str(tab)
-  local res = ""
-  for _, v in ipairs(tab) do
-    res = res .. tostring(v) .. "  "
-  end
-  return res:sub(1,-3)
-end
 
 local function chatHook(user, channel, message)
   hook.log:info(("%s %s: %s"):format(channel,("<%s>"):format(user.nick),message))
