@@ -52,7 +52,7 @@ local BASE_ENV = {}
 ([[
 
 _VERSION assert error    ipairs   next pairs
-pcall    select tonumber tostring type unpack xpcall
+select tonumber tostring type unpack
 
 coroutine.create coroutine.resume coroutine.running coroutine.status
 coroutine.wrap   coroutine.yield
@@ -97,6 +97,25 @@ end)
 
 -- auxiliary functions/variables
 --
+BASE_ENV.pcall = function(f, ...)
+  local ok, result = pcall(f, ...)
+  if not ok and result:find("Quota exceeded:")
+    error(result)
+  end
+  return ok, result
+end
+
+BASE_ENV.xpcall = function(f, msgh, ...)
+  return xpcall(f, function(msg)
+      if msg:find("Quota exceeded:") then
+        error(msg)
+      end
+      msgh(msg)
+    end
+  end
+end
+
+
 
 local function merge(dest, source)
   for k,v in pairs(source) do
