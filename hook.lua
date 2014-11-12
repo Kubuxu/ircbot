@@ -48,7 +48,7 @@ end
 
 function hook.auth(user)
   user.access = user.access or hook.irc:whois(user.nick).access
-  return (user.access.op or user.access.halfop))
+  return (user.access.op or user.access.halfop)
 end
 
 
