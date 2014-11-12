@@ -46,6 +46,9 @@ function hook.new(names, handler, accessLevel)
   end
 end
 
+function hook.auth(user)
+  return (user.access and (user.op or user.halfop))
+end
 
 
 return hook

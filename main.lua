@@ -1,3 +1,4 @@
+local args = {...}
 
 local oldpath = package.path
 
@@ -8,7 +9,7 @@ hook = require "hook"
 
 local sleep = require "socket".sleep
 
-local c = irc.new{nick = "ThatBot"}
+local c = irc.new{nick = "Entity"}
 
 hook.setIRC(c)
 
@@ -32,6 +33,10 @@ end
 
 
 c:connect("irc.esper.net")
+if args[1] then
+  c:sendChat("NickServ", "identify " .. args[1]
+end
+sleep(500)
 c:join("#Starchasers")
 
 while true do
