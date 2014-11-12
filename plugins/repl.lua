@@ -22,7 +22,7 @@ local function handle(message, user, channel)
   elseif type(result)=="function"then
     local res = ""
     for v in result do
-      res = res .. tostring(v) .. ","
+      res = res .. tostring(v) .. ", "
       if res:len() > 1024 then
         return res
       end
