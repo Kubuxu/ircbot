@@ -67,7 +67,7 @@ os.clock os.difftime os.time
 
 string.byte string.char  string.find  string.format string.gmatch
 string.gsub string.len   string.lower string.match  string.reverse
-string.sub  string.upper
+string.sub  string.upper string.rep
 
 table.insert table.maxn table.remove table.sort
 
