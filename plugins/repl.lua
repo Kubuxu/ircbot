@@ -21,8 +21,6 @@ local function handle(message, user, channel)
   
   local ok, result =  pcall(sandbox(message,{["env"] = env}))
   
-  
-  --[[
   if not ok then
     return result
   elseif type(result)=="function"then
@@ -36,7 +34,6 @@ local function handle(message, user, channel)
     return res:sub(1,-3)
   end
   
-  ]]--
   return result
 end
 

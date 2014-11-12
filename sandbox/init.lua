@@ -99,7 +99,7 @@ end)
 --
 BASE_ENV.pcall = function(f, ...)
   local result = table.pack(pcall(f, ...))
-  if not result[1] and result[2]:find("^Quota exceeded:")
+  if not result[1] and result[2]:find("^Quota exceeded:") then
     error(result[2])
   end
   return result:unpack()
