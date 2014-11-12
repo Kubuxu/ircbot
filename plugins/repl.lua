@@ -9,9 +9,13 @@ local function handle(message, user, channel)
   if not hook.auth(user) then
     return "Nope"
   end
- 
-  envs[user.nick] = envs[user.nick] or {}
   local env = envs[user.nick]
+  
+  if env == nil then
+    env = {}
+    envs[user.nick] = env
+    setmetatable(env, {["__mode"] = "k"})
+  end
 
   local message = message:gsub("^%s*=", "return ") 
   
