@@ -98,11 +98,11 @@ end)
 -- auxiliary functions/variables
 --
 BASE_ENV.pcall = function(f, ...)
-  local ok, result = pcall(f, ...)
-  if not ok and result:find("Quota exceeded:")
-    error(result)
+  local result = pack(pcall(f, ...))
+  if not result[1] and result[2]:find("Quota exceeded:")
+    error(result[2])
   end
-  return ok, result
+  return result:unpack()
 end
 
 BASE_ENV.xpcall = function(f, msgh, ...)
