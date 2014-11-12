@@ -101,7 +101,7 @@ end)
 local function merge(dest, source)
   for k,v in pairs(source) do
     if dest[k] == nil then
-      dest[k] = dest[k] or v
+      dest[k] = v
     end
   end
   return dest
