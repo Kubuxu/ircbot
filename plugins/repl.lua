@@ -27,7 +27,7 @@ local function handle(message, user, channel)
         return res .. "..."
       end
     end
-    return res:sub(1,-2)
+    return res:sub(1,-3)
   end
   
   return result
