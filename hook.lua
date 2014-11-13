@@ -8,18 +8,18 @@ hook.log:setLevel(logging.INFO)
 local hooks = {}
 
 
-local function str(tab)
-  if type(tab) ~= "table" then
-    return tostring(tab)
-  end
-  
+local function str(count, tab)
   local res = ""
-  tab[1] = tab[1]==nil and "nil" or tab[1]
-  for i, v in ipairs(tab) do
-    res = res .. tostring(v) .. "  "
+  for i = 2, count do
+    res = res .. tostring(tab[i]) .. "  "
   end
   return res:gsub("  $","")
 end
+
+local function countVals(...)
+  return select("#" ,...), table.pack(...)
+end
+
 
 local function handleCommands(user, channel, message)
 
@@ -30,9 +30,9 @@ local function handleCommands(user, channel, message)
   local message = message:sub(2)
   cmd = message:gsub(" .+$", "")
   if hooks["command_"..cmd] then
-    local _, res = pcall(hooks["command_"..cmd].handler,message:gsub(cmd.." ",""),user, channel)
-    if select("#", res) >= 0 then
-      hook.irc:sendChat(channel, user.nick..", ".. str(res):gsub("[\n\r]+"," | "):gsub("  $",""))
+    local count, res = countVals(pcall(hooks["command_"..cmd].handler,message:gsub(cmd.." ",""),user, channel))
+    if cout >= 1 then
+      hook.irc:sendChat(channel, user.nick..", ".. str(count,res):gsub("[\n\r]+"," | "):gsub("  $",""))
     end
   end
   
