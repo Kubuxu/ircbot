@@ -102,7 +102,7 @@ local function parse(data)
 end
  
  local function handleCommand(message, user,channel)
-   return parse(message)
+   return parse(message:gsub("function","NOPE"):gsub("repeate","NOPE"):gsub("while","NOPE"))
  end
  
  hook.new("command_calc", handleCommand)
