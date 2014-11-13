@@ -10,11 +10,9 @@ local hooks = {}
 
 local function str(tab)
   local res = ""
-  tab[2] = tab[2] or "nil"
+  tab[1] = tab[1]==nil and "nil" or "false"
   for i, v in ipairs(tab) do
-    if i ~= 1 then
-      res = res .. tostring(v) .. "  "
-    end
+    res = res .. tostring(v) .. "  "
   end
   return res:gsub("  $","")
 end
@@ -28,8 +26,10 @@ local function handleCommands(user, channel, message)
   local message = message:sub(2)
   cmd = message:gsub(" .+$", "")
   if hooks["command_"..cmd] then
-    local res = table.pack(pcall(hooks["command_"..cmd].handler,message:gsub(cmd.." ",""),user, channel))
-    hook.irc:sendChat(channel, user.nick..", ".. str(res):gsub("[\n\r]+"," | "))
+    local _ res = table.pack(pcall(hooks["command_"..cmd].handler,message:gsub(cmd.." ",""),user, channel))
+    if select("#", res) >= 0 then
+      hook.irc:sendChat(channel, user.nick..", ".. str(res):gsub("[\n\r]+"," | "):gsub("  $",""))
+    end
   end
   
 end
