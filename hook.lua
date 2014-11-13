@@ -9,7 +9,7 @@ local hooks = {}
 
 
 local function str(tab)
-  if type(tab) ~= nil then
+  if type(tab) ~= "table" then
     return tostring(tab)
   end
   
