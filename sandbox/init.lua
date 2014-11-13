@@ -139,9 +139,9 @@ end
 -- Public interface: sandbox.protect
 function sandbox.protect(f, options)
   if type(f) ~= 'string' then return end
-
+  
   options = options or {}
-
+  
   local quota = false
   if options.quota ~= false then
     quota = options.quota or 500000
