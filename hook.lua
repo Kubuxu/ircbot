@@ -10,7 +10,7 @@ local hooks = {}
 
 local function str(tab)
   local res = ""
-  tab[1] = tab[1]==nil and "nil" or "false"
+  tab[1] = tab[1]==nil and "nil" or tab[1]
   for i, v in ipairs(tab) do
     res = res .. tostring(v) .. "  "
   end
