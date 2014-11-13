@@ -31,7 +31,7 @@ local function handleCommands(user, channel, message)
   cmd = message:gsub(" .+$", "")
   if hooks["command_"..cmd] then
     local count, res = countVals(pcall(hooks["command_"..cmd].handler,message:gsub(cmd.." ",""),user, channel))
-    if cout >= 1 then
+    if count >= 1 then
       hook.irc:sendChat(channel, user.nick..", ".. str(count,res):gsub("[\n\r]+"," | "):gsub("  $",""))
     end
   end
