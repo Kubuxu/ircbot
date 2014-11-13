@@ -10,14 +10,14 @@ local hooks = {}
 
 local function str(count, tab)
   local res = ""
-  for i = 2, count do
+  for i = 1, count do
     res = res .. tostring(tab[i]) .. "  "
   end
   return res:gsub("  $","")
 end
 
 local function countVals(...)
-  return select("#" ,...), table.pack(...)
+  return select("#" , ...) - 1, table.pack(select(2, ...))
 end
 
 
