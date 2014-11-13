@@ -168,13 +168,18 @@ function sandbox.protect(f, options)
       sethook(timeout, "", quota)
     end
 
+   local function handleres(...)
+     cleanup()
+     if not ... then error(select(2, ...), 0) end
+     
+     return select(2,...)
+   end
+   
+   return handleres(pcall(f, ...))
 
-    local result = table.pack(pcall(f, ...))
+    
 
-    cleanup()
-
-    if not result[1] then error(result[2],0) end
-    return table.unpack(result,2)
+    
   end
 end
 
