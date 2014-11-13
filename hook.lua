@@ -9,6 +9,10 @@ local hooks = {}
 
 
 local function str(tab)
+  if type(tab) ~= nil then
+    return tostring(tab)
+  end
+  
   local res = ""
   tab[1] = tab[1]==nil and "nil" or tab[1]
   for i, v in ipairs(tab) do
