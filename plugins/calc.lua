@@ -100,9 +100,10 @@ local function parse(data)
   local valid, result  = pcall(solve,fun)
   return result
 end
- 
+
+
  local function handleCommand(message, user,channel)
-   return parse(message:gsub("function","NOPE"):gsub("repeate","NOPE"):gsub("while","NOPE"))
+   return parse(message:gsub("function","NOPE"):gsub("repeat","NOPE"):gsub("while","NOPE"))
  end
  
  hook.new("command_calc", handleCommand)
