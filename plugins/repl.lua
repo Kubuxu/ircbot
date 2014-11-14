@@ -5,10 +5,10 @@ local sandbox = require "sandbox"
 local envs = {}
 
 local function handle(message, user, channel)
-  
-  if not hook.auth(user) then
-    return "Nope"
+  if #message == 0 then 
+    return
   end
+  
   local env = envs[user.nick]
   
   if env == nil then
