@@ -61,13 +61,7 @@ function hook.new(names, handler, accessLevel)
 end
 
 function hook.auth(user)
-  
-
-  if false and (user.access.op == nil) then
-    hook.irc:whois(user.nick)
-  end
-  --print(user.access.op, user.access.halfop)
- return true --(user.access.op or user.access.halfop)
+ return user.nick == "Kubuxu"
 end
 
 

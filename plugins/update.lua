@@ -9,6 +9,9 @@ local function build(...)
 end
 
 local function handleGit(message, user, channel)
+  if not hook.auth(user) then
+    return "Nope"
+  end
   if message:find("^pull") then
     return table.concat(build(io.popen("git pull"):lines()), ", ")
   end
@@ -16,6 +19,10 @@ end
 hook.new("command_git", handleGit)
 
 local function reload(message, user, channel)
+  
+  if not hook.auth(user) then
+    return "Nope"
+  end 
   
   local pack = message:match'^%s*(.*%S)'
   if not pack then
@@ -39,7 +46,19 @@ end
 
 hook.new("command_reload", reload)
 
-hook.new("command_unsafestop", function() os.exit() end)
+hook.new("command_unsafestop", function()
+    if not hook.auth(user) then
+      return "Nope"
+    end
+    os.exit()
+  end)
 
-hook.new("command_restart", function() io.popen("sleep 3 && ./start.sh") hook.irc:disconnect() os.exit() end)
+hook.new("command_restart", function()
+  if not hook.auth(user) then
+    return "Nope"
+  end
+  io.popen("sleep 3 && ./start.sh")
+  hook.irc:disconnect()
+  os.exit()
+  end)
   
