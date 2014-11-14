@@ -40,7 +40,7 @@ local function solve(fun,options)
   
   local maxi = options.maxi or 200
   local i = 2
-  while i < maxi and fun(f(x[i]) == fun(x[i]) and  fun(x[i]) ~= fun(x[i-1]) do
+  while i < maxi and fun(x[i]) == fun(x[i]) and  fun(x[i]) ~= fun(x[i-1]) do
     i = i + 1
     x[i] = x[i-1] - fun(x[i-1]) * (x[i-1] - x[i-2]) / (fun(x[i-1]) - fun(x[i-2]))
     print(x[i],x[i-1],fun(x[i]),fun(x[i-1]))
