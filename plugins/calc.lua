@@ -40,14 +40,14 @@ local function solve(fun,options)
   
   local maxi = options.maxi or 200
   local i = 2
-  while i < maxi and fun(x[i]) == fun(x[i]) and  fun(x[i]) ~= fun(x[i-1]) do
+  while i < maxi and fun(xf([i]) == fun(x[i]) and  fun(x[i]) ~= fun(x[i-1]) do
     i = i + 1
     x[i] = x[i-1] - fun(x[i-1]) * (x[i-1] - x[i-2]) / (fun(x[i-1]) - fun(x[i-2]))
     print(x[i],x[i-1],fun(x[i]),fun(x[i-1]))
   end
     print(x[i])
     local fx = fun(x[i])
-  if fx ~= fx or i == maxi or math.abs(fx) > (math.abs(fx) * 1^-50) and not options.force then
+  if fx ~= fx or i == maxi or math.abs(fx) > (math.abs(fx) * 2^-50) and not options.force then
     return "I'am not complex enough. Try calculate it by hand..."
   end
   
