@@ -46,14 +46,14 @@ end
 
 hook.new("command_reload", reload)
 
-hook.new("command_unsafestop", function()
+hook.new("command_unsafestop", function(message, user, channel)
     if not hook.auth(user) then
       return "Nope"
     end
     os.exit()
   end)
 
-hook.new("command_restart", function()
+hook.new("command_restart", function(message, user, channel)
   if not hook.auth(user) then
     return "Nope"
   end
