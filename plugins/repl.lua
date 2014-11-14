@@ -6,7 +6,7 @@ local envs = {}
 
 local function handle(message, user, channel)
   
-  if #(messag:gsub("^%s","")) == 0 then 
+  if #(message:gsub("^%s","")) == 0 then 
     return
   end
   
