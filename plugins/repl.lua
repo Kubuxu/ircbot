@@ -5,7 +5,8 @@ local sandbox = require "sandbox"
 local envs = {}
 
 local function handle(message, user, channel)
-  if #message == 0 then 
+  
+  if #(messag:gsub("^%s","")) == 0 then 
     return
   end
   
