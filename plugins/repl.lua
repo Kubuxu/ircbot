@@ -9,7 +9,9 @@ local function get(nick)
     return envs[nick]
   else
     envs[nick] = {}
-    setmetatable(envs[nick], {["__mode"] = "k"})
+    if hook.auth(nick) then
+      setmetatable(envs[nick], {["__mode"] = "k"})
+    end
     return envs[nick]
   end
 end
