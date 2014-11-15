@@ -78,7 +78,7 @@ end
 
 
 local function parse(data)
-  data = data:gsub("%)%(",")*(")
+  data = data:gsub("%)%(",")*("):gsub("=+", "=")
   
   local ready, n = data:gsub("=(.-)$"," -(%1)")
   if n == 0 then
