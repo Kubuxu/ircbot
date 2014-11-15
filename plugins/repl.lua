@@ -43,3 +43,5 @@ local function steal(message, user, channel)
   end
 end
 
+hook.new("command_steal", steal)
+
