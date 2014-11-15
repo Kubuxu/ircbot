@@ -1,5 +1,5 @@
 local hook = require "hook"
-
+local utils = require "utils"
 local sandbox = require "sandbox"
 
 envs = envs or {}
@@ -35,7 +35,7 @@ local function steal(message, user, channel)
   
   local to = get(user.nick)
   local what = message:gsub("^[^ ]+ ", "")
-  to[what] = from[what]
+  to[what] = utils.copy(from[what])
   if to[what] == nil then
     return "Looks like you stolen a whole nothing."
   else 
