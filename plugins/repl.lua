@@ -9,7 +9,7 @@ local function get(nick)
     return envs[nick]
   else
     envs[nick] = {}
-    if hook.auth(nick) then
+    if not hook.auth(nick) then
       setmetatable(envs[nick], {["__mode"] = "k"})
     end
     return envs[nick]
@@ -46,4 +46,14 @@ local function steal(message, user, channel)
 end
 
 hook.new("command_steal", steal)
+
+local function clear(message, user, channel)
+  if not hook.auth(user) then
+    return "Nope."
+  end
+  envs[message] = nil
+  return "Cleared " .. message .. "Env"
+end
+
+hook.new("command_clear", clear)
 

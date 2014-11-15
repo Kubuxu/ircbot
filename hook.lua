@@ -61,7 +61,8 @@ function hook.new(names, handler, accessLevel)
 end
 
 function hook.auth(user)
- return user.nick == "Kubuxu"
+  user = type(user) == "string" and {["nick"] = user} or user
+  return user.nick == "Kubuxu"
 end
 
 
