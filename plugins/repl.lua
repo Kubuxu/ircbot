@@ -5,15 +5,14 @@ local sandbox = require "sandbox"
 envs = envs or {}
 
 local function get(nick)
-  if envs[nick] then
-    return envs[nick]
-  else
+  if not envs[nick] then
     envs[nick] = {}
     if not hook.auth(nick) then
       setmetatable(envs[nick], {["__mode"] = "k"})
     end
-    return envs[nick]
   end
+  envs[nick].nick = nick
+  return envs[nick]
 end
 
 
@@ -57,3 +56,14 @@ end
 
 hook.new("command_clear", clear)
 
+local function stash(message, user, channel)
+  
+  
+end
+hook.new("command_stash", stash)
+
+local function unstash(message, user, channel)
+  
+  
+end
+hook.new("command_unstash", stash)
