@@ -52,7 +52,7 @@ local function clear(message, user, channel)
     return "Nope."
   end
   envs[message] = nil
-  return "Cleared " .. message .. "Env"
+  return "Cleared " .. message .. "'s ENV"
 end
 
 hook.new("command_clear", clear)
