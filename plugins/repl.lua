@@ -27,6 +27,7 @@ local function handle(message, user, channel)
 end
 
 hook.new("command_>", handle)
+hook.new("command_=", function(message,...) return handle("="..message,...) end)
 
 local function steal(message, user, channel)
   local from = envs[message:gsub(" .+$", "")]
