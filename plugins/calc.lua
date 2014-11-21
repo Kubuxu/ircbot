@@ -1,22 +1,38 @@
 local hook = require "hook"
 
-local ENV_MATH = {}
-
+local ENV_MATH = {x = 0}
+local underenv = {}
 for i, v in pairs(math) do
-    ENV_MATH[i] = v
+    underenv[i] = v
   end
 for i, v in pairs(bit32) do
-  ENV_MATH[i] = v
+  underenv[i] = v
 end
 
-function getMathENV()
-  local res = {}
-  for i,v in pairs(ENV_MATH) do
-    res[i]=v
-  end
-  return res
-end
+local mathmeta = {
+  
+  __index = function(self, index)
+    if underenv[index] then
+      return underenv[index]
+    end
+    local number, newindex = index:gmatch("(%d+%.?%d*)(.+)")()
+    number = tonumber(number)
+    local value = underenv[newindex]
+    if number == nil or value == nil then
+      return nil;
+    end
+    if type(value) == "function" then
+      return function(...) return number * value(...) end
+    elseif tonumber(value) ~= nil then
+      return number * tonumber(value) 
+    end
+    return nil
+  end,
+  __newindex = function() end
+  
+}
 
+setmetatable(ENV_MATH,mathmeta)
   
 
 local function solve(fun,options)
@@ -56,16 +72,9 @@ end
 
 
 local function eval(data)
-  local ENV_MATH = {}
-  for i, v in pairs(math) do
-    ENV_MATH[i] = v
-  end
-  for i, v in pairs(bit32) do
-    ENV_MATH[i] = v
-  end 
+
   
-  
-  local fun, valid = load(" return (".. data .. ") ",nil,"t",getMathENV())
+  local fun, valid = load(" return (".. data .. ") ",nil,"t",ENV_MATH)
   if not fun then
     return valid
   end
@@ -89,7 +98,7 @@ local function parse(data)
     ENV_MATH[i] = v
   end
   print(ready)
-  local fun, valid = load("return function(x) return (".. ready .. ") end",nil,"t",getMathENV())
+  local fun, valid = load("return function(thisisuniqe) x = thisisuniqe return (".. ready .. ") end",nil,"t",ENV_MATH)
   if not fun then
     return valid
   end
