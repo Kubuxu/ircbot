@@ -8,3 +8,19 @@ hook.new({"command_source","command_souce"}, function(message, user, channel) re
 
 hook.new("command_join", function(message, user, channel) if not hook.auth(user.nick) then return "Nope" else hook.irc:join(message) end end)
 hook.new("command_leave", function(message, user, channel) if not hook.auth(user.nick) then return "Nope" else hook.irc:part(message) end end)
+
+local debug = nil
+hook.new("command_debug", function(message, user, channel)
+    if not hook.auth(user.nick) then
+      return "Nope"
+    elseif debug then
+      hook.irc:hook("OnSend", function(msg)
+          print(msg)
+          hook.irc:sendChat("Kubuxu", msg)
+        end)
+    end
+  end)
+
+
+
+
