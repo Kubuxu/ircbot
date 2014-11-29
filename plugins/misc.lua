@@ -13,7 +13,7 @@ local debug = nil
 hook.new("command_debug", function(message, user, channel)
     if not hook.auth(user.nick) then
       return "Nope"
-    elseif debug then
+    elseif not debug then
       debug = hook.irc:hook("OnSend", function(msg)
           print(msg)
           hook.irc:sendChat("Kubuxu", msg)
