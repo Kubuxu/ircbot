@@ -16,7 +16,6 @@ hook.new("command_debug", function(message, user, channel)
     elseif not debug then
       debug = hook.irc:hook("OnSend", function(msg)
           print(msg)
-          hook.irc:sendChat("Kubuxu", msg)
         end)
     else
       hook.irc:unhook(debug)
