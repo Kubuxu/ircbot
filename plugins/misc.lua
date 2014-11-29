@@ -15,7 +15,7 @@ hook.new("command_debug", function(message, user, channel)
       return "Nope"
     elseif not debug then
       debug = hook.irc:hook("OnSend", function(msg)
-          print(msg)
+          print("OnSend",msg)
         end)
     else
       hook.irc:unhook(debug)
