@@ -41,8 +41,11 @@ end
 
 local function chatHook(user, channel, message)
   hook.log:info(("%s %s: %s"):format(channel,("<%s>"):format(user.nick),message))
+  if not channel.match("^#") then
+    channel = user.nick
+  end
   handleCommands(user, channel, message)
-   
+  
 end
 
 
