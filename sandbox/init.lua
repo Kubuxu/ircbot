@@ -49,13 +49,14 @@ local BASE_ENV = {}
 
 
 -- Safe packages/functions below
+
+--coroutine.create coroutine.resume coroutine.running coroutine.status
+--coroutine.wrap   coroutine.yield
 ([[
 
 _VERSION assert error    ipairs   next pairs
 select tonumber tostring type unpack
 
-coroutine.create coroutine.resume coroutine.running coroutine.status
-coroutine.wrap   coroutine.yield
 
 math.abs   math.acos math.asin  math.atan math.atan2 math.ceil
 math.cos   math.cosh math.deg   math.exp  math.fmod  math.floor
