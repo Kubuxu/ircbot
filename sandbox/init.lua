@@ -70,7 +70,7 @@ string.byte string.char  string.find  string.format string.gmatch
 string.gsub string.len   string.lower string.match  string.reverse
 string.sub  string.upper string.rep
 
-table.insert table.maxn table.remove table.sort table.pack
+table.concat table.insert table.pack table.remove table.sort table.unpack
 
 ]]):gsub('%S+', function(id)
   local module, method = id:match('([^%.]+)%.([^%.]+)')
