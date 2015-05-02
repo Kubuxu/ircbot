@@ -6,6 +6,7 @@ package.path = "./?/?.lua;./?/init.lua;" .. package.path
 require "irc"
 
 hook = require "hook"
+serialization = require "serialization"
 
 local sleep = require "socket".sleep
 

@@ -30,6 +30,7 @@ local sandbox = {
 
 -- The base environment is merged with the given env option (or an empty table, if no env provided)
 --
+
 local BASE_ENV = {}
 
 -- List of non-safe packages/functions:
@@ -72,6 +73,8 @@ string.sub  string.upper string.rep
 
 table.concat table.insert table.pack table.remove table.sort table.unpack
 
+serialization
+
 selene _selene
 
 
@@ -102,7 +105,7 @@ local function protect_module(module, module_name)
   })
 end
 
-('coroutine math os string table selene _selene'):gsub('%S+', function(module_name)
+('coroutine math os string table selene _selene serialization'):gsub('%S+', function(module_name)
   BASE_ENV[module_name] = protect_module(BASE_ENV[module_name], module_name)
 end)
 
