@@ -24,7 +24,7 @@ if not lfs then
 end
 
 if not _G._selene then _G._selene = {} end
-_G._selene.liveMode = true
+_G._selene.liveMode = false
 require("selene")
 
 local modsdir = "./plugins"

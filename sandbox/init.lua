@@ -175,7 +175,7 @@ function sandbox.protect(code, options)
   
   local sucess, result = pcall(selene.parse, code)
   if not sucess then
-    error("Selene couldn't parse: \"" .. code .. "\" becacause: " .. result)
+    error("Selene couldn't parse: \"" .. code .. "\" because: " .. result)
   end
   code = result
   
