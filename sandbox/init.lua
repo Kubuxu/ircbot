@@ -194,11 +194,14 @@ function sandbox.protect(code, options)
    local function handleres(...)
      cleanup()
      if not ... then error(select(2, ...), 0) end
-     
-     return select(2,...)
+     if env.__toprint ~= nil and type(env.__toprint) == "table" and #env.__toprint ~= 0 then
+       return table.unpack(env.__toprint), select(2,...)
+     else
+       return select(2,...)
+     end
    end
    
-   return table.unpack(env.__toprint), handleres(pcall(f, ...))
+   return handleres(pcall(f, ...))
     
   end
 end
