@@ -43,7 +43,9 @@ if args[1] then
 end
 sleep(1)
 c:join("#Starchasers")
-c:join("#ocbots")
+c:join("#V")
+c:join("#NovaAPI")
+c:join("#computornics")
 while true do
   c:think()
   sleep(0.5)
