@@ -130,16 +130,6 @@ BASE_ENV.xpcall = function(f, msgh, ...)
   end, ...)
 end
 
-BASE_ENV.print = function(...)
-  _G.__toprint = _G.__toprint or {}
-  local args = table.pack(...)
-  for x = 1, args.n do
-    table.insert(_G.__toprint, serialization.serialize(args[x]))
-  end
-end
-
-
-
 
 local function merge(dest, source)
   for k,v in pairs(source) do
@@ -170,9 +160,17 @@ function sandbox.protect(code, options)
     quota = options.quota or 500000
   end
   
-  local env = options.env or {}
+  env = options.env or {}
   env._G = env._G or env
   env = merge(env, BASE_ENV)
+  
+  env.print = env.print or function(...)
+    env.__toprint = env.__toprint or {}
+    local args = table.pack(...)
+    for x = 1, args.n do
+      table.insert(env.__toprint, serialization.serialize(args[x]))
+    end
+  end
   
   local message = nil
   f , message = load(code,nil,"t",env)
@@ -201,6 +199,7 @@ function sandbox.protect(code, options)
          result[#result+1] = args[x]
        end
        result.n = result.n + args.n - 1
+       env.__toprint = nil
        return table.unpack(result)
      else
        return select(2,...)
