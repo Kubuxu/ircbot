@@ -169,7 +169,7 @@ function sandbox.protect(f, options)
   f , message = load(f,nil,"t",env)
   
   if not f then
-    error(message)
+    return "Function: " .. f .. "could not be loaded because: " .. message
   end
   
   return function(...)

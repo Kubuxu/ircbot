@@ -31,7 +31,7 @@ local function reload(message, user, channel)
   local res = ""
   if package.loaded[pack] then
     res = res .. "Unloading " .. pack .. "\n"
-    _ = type(package.loaded[pack]) == "table" and package.loaded[pack].uninit and package.loaded[pack].uninit()
+    _ = type(package.loaded[pack]) == "table" and package.loaded[pack].unload and package.loaded[pack].unload()
     package.loaded[pack] = nil
   end
   res = res .. "Loading " .. pack .. "\n"
