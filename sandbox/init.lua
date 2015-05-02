@@ -195,7 +195,7 @@ function sandbox.protect(code, options)
      cleanup()
      if not ... then error(select(2, ...), 0) end
      if env.__toprint ~= nil and type(env.__toprint) == "table" and #env.__toprint ~= 0 then
-       return table.unpack(env.__toprint), select(2,...)
+       return #env.__toprint, select(2,...)
      else
        return select(2,...)
      end
