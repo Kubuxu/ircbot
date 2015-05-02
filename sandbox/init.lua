@@ -151,8 +151,8 @@ local function cleanup()
 end
 
 -- Public interface: sandbox.protect
-function sandbox.protect(f, options)
-  if type(f) ~= 'string' then return end
+function sandbox.protect(code, options)
+  if type(code) ~= 'string' then return end
   
   options = options or {}
   
@@ -166,10 +166,10 @@ function sandbox.protect(f, options)
   env = merge(env, BASE_ENV)
   
   local message = nil
-  f , message = load(f,nil,"t",env)
+  f , message = load(code,nil,"t",env)
   
   if not f then
-    return "Function: " .. f .. "could not be loaded because: " .. message
+    return "Function: " .. code .. "could not be loaded because: " .. message
   end
   
   return function(...)
