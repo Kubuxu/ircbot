@@ -651,7 +651,7 @@ end
 -- Parsing
 --------
 
-local selenep = require("selenep")
+local selenep = require("selene.parser")
 local function parse(chunk)
   return selenep.parse(chunk)
 end
