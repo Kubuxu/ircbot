@@ -22,6 +22,10 @@ if not lfs then
   end
 end
 
+if not _G._selene then _G._selene = {} end
+_G._selene.liveMode = true
+require("selene")
+
 local modsdir = "./plugins"
 package.path = ("lualibs/?.lua;lualibs/?/?.lua;lualibs/?/init.lua;lualibs/?/?/?.lua;lualibs/?/?/init.lua;"):gsub("lualibs",modsdir) .. package.path
 for mod in lfs.dir(modsdir) do
