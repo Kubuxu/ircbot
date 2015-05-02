@@ -45,7 +45,7 @@ sleep(1)
 c:join("#Starchasers")
 c:join("#V")
 c:join("#NovaAPI")
-c:join("#computornics")
+c:join("#computronics")
 while true do
   c:think()
   sleep(0.5)
