@@ -130,6 +130,15 @@ BASE_ENV.xpcall = function(f, msgh, ...)
   end, ...)
 end
 
+BASE_ENV.print = function(...)
+  __toprint = __toprint or {}
+  local args = table.pack(...)
+  for x = 1, args.n do
+    table.insert(__toprint, serialization.serialize(args[x]))
+  end
+end
+
+
 
 
 local function merge(dest, source)
@@ -169,7 +178,7 @@ function sandbox.protect(code, options)
   f , message = load(code,nil,"t",env)
   
   if not f then
-    return error("Function: " .. code .. "could not be loaded because: " .. message)
+    return error("Function: \"" .. code .. "\" could not be loaded because: " .. message)
   end
   
   return function(...)
@@ -189,10 +198,7 @@ function sandbox.protect(code, options)
      return select(2,...)
    end
    
-   return handleres(pcall(f, ...))
-
-    
-
+   return table.unpack(env.__toprint), handleres(pcall(f, ...))
     
   end
 end

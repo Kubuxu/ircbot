@@ -175,17 +175,17 @@ end
 
 local function findDollars(tChunk, i, part)
   local curr = tChunk[i + 1]
-  if curr:find("(", 1, true) then
+  if curr:find("^(") then
     tChunk[i] = "_G._selene._new"
-  elseif curr:find("l", 1, true) then
+  elseif curr:find("^l") then
     tChunk[i] = "_G._selene._newList"
-  elseif curr:find("f", 1, true) then
+  elseif curr:find("^f") then
     tChunk[i] = "_G._selene._newFunc"
-  elseif curr:find("s", 1, true) then
+  elseif curr:find("^s") then
     tChunk[i] = "_G._selene._newString"
   elseif tChunk[i - 1]:find("[:%.]$") then
     tChunk[i - 1] = tChunk[i - 1]:sub(1, #(tChunk[i - 1]) - 1)
-    tChunk[i] = "._tbl"
+    tChunk[i] = "()"
   else
     perror("invalid $ at index "..i)
   end
@@ -195,6 +195,7 @@ end
 local function findSelfCall(tChunk, i, part)
   local prev = tChunk[i - 1]
   local front = tChunk[i + 1]
+  if not tChunk[i + 2] then tChunk[i + 2] = ""
   if tChunk[i + 1]:find(varPattern) and not tChunk[i + 2]:find("(", 1, true) then
     tChunk[i+1] = tChunk[i+1].."()"
     return true
@@ -224,25 +225,24 @@ end
 
 local function findForeach(tChunk, i, part)
   local start = nil
-  local vars = ""
   local step = i - 1
+  local params = {}
   while not start do
     if tChunk[step] == "for" then
       start = step + 1
     else
-      vars = tChunk[step] .. " " .. vars
+      table.insert(params, 1, trim(tChunk[step]))
       step = step - 1
     end
   end
-  local params = split(vars, ",")
   step = i + 1
   local stop = nil
-  vars = ""
+  local vars = {}
   while not stop do
     if tChunk[step] == "do" then
       stop = step - 1
     else
-      vars = vars .. " " .. tChunk[step]
+      table.insert(vars, trim(tChunk[step]))
       step = step + 1
     end
   end
@@ -251,7 +251,12 @@ local function findForeach(tChunk, i, part)
       return false
     end
   end
-  local func = table.concat(params, ",") .. " in lpairs("..vars..")"
+  for _, p in ipairs(vars) do
+    if not p:find("^"..varPattern .. "$") then
+      return false
+    end
+  end
+  local func = table.concat(params, ",") .. " in lpairs("..table.concat(vars, ",")..")"
   for i = start, stop do
     table.remove(tChunk, start)
   end
