@@ -72,6 +72,16 @@ string.sub  string.upper string.rep
 
 table.concat table.insert table.pack table.remove table.sort table.unpack
 
+selene _selene
+
+
+ltype checkType checkFunc parCount lpairs isList
+
+string.foreach string.map string.filter string.drop string.dropwhile string.foldleft string.foldright string.split
+
+table.shallowcopy table.flatten
+
+
 ]]):gsub('%S+', function(id)
   local module, method = id:match('([^%.]+)%.([^%.]+)')
   if module then
@@ -92,7 +102,7 @@ local function protect_module(module, module_name)
   })
 end
 
-('coroutine math os string table'):gsub('%S+', function(module_name)
+('coroutine math os string table selene _selene'):gsub('%S+', function(module_name)
   BASE_ENV[module_name] = protect_module(BASE_ENV[module_name], module_name)
 end)
 
