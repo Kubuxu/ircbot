@@ -1,4 +1,4 @@
-reqiure"selene"
+require"selene"
 
 
 local function copy(obj, seen)
