@@ -131,10 +131,10 @@ BASE_ENV.xpcall = function(f, msgh, ...)
 end
 
 BASE_ENV.print = function(...)
-  __toprint = __toprint or {}
+  _G.__toprint = _G.__toprint or {}
   local args = table.pack(...)
   for x = 1, args.n do
-    table.insert(__toprint, serialization.serialize(args[x]))
+    table.insert(_G.__toprint, serialization.serialize(args[x]))
   end
 end
 
@@ -195,7 +195,7 @@ function sandbox.protect(code, options)
      cleanup()
      if not ... then error(select(2, ...), 0) end
      if env.__toprint ~= nil and type(env.__toprint) == "table" and #env.__toprint ~= 0 then
-       return #env.__toprint, select(2,...)
+       return table.unpack(env.__toprint), select(2,...)
      else
        return select(2,...)
      end
