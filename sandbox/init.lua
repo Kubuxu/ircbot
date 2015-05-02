@@ -172,8 +172,13 @@ function sandbox.protect(code, options)
     end
   end
   
-  local message = nil
-  f , message = load(code,nil,"t",env)
+  local sucess, result = pcall(selene.parse, code)
+  if not sucess then
+    error("Selene couldn't parse: \"" .. code .. "\" becacause: " .. result)
+  end
+  code = result
+  
+  local f, message = load(code,nil,"t",env)
   
   if not f then
     return error("Function: \"" .. code .. "\" could not be loaded because: " .. message)
