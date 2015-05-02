@@ -31,6 +31,7 @@ local sandbox = {
 -- The base environment is merged with the given env option (or an empty table, if no env provided)
 --
 
+local selene = require"selene"
 local BASE_ENV = {}
 
 -- List of non-safe packages/functions:
