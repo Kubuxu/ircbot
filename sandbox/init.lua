@@ -33,6 +33,7 @@ local sandbox = {
 
 local selene = require"selene"
 local BASE_ENV = {}
+require"bit32"
 
 -- List of non-safe packages/functions:
 --
@@ -71,6 +72,8 @@ os.clock os.difftime os.time os.date
 string.byte string.char  string.find  string.format string.gmatch
 string.gsub string.len   string.lower string.match  string.reverse
 string.sub  string.upper string.rep
+
+bit32
 
 table.concat table.insert table.pack table.remove table.sort table.unpack
 
