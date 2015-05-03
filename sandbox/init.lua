@@ -33,7 +33,6 @@ local sandbox = {
 
 local selene = require"selene"
 local BASE_ENV = {}
-require"bit32"
 
 -- List of non-safe packages/functions:
 --
