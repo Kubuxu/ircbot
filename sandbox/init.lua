@@ -184,7 +184,7 @@ function sandbox.protect(code, options)
   local f, message = load(code,nil,"t",env)
   
   if not f then
-    return error("Function: \"" .. code:gsub("[\n\r]+","") .. "\" could not be loaded because: " .. message)
+    return error("Function: \"" .. code:gsub("[\n\r]+"," ") .. "\" could not be loaded because: " .. message)
   end
   
   return function(...)
