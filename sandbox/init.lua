@@ -76,6 +76,7 @@ bit32
 
 table.concat table.insert table.pack table.remove table.sort table.unpack
 
+
 serialization
 
 selene _selene
@@ -85,7 +86,7 @@ ltype checkType checkFunc parCount lpairs isList
 
 string.foreach string.map string.filter string.drop string.dropwhile string.foldleft string.foldright string.split
 
-table.shallowcopy table.flatten
+table.shallowcopy table.flatten table.range 
 
 
 ]]):gsub('%S+', function(id)
