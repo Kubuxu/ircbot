@@ -20,7 +20,7 @@ local function handle(message, user, channel)
   if #(message:gsub("^%s","")) == 0 then 
     return
   end
-  local message = message:gsub("^%s*=", "return ") 
+  local message = message:gsub("^%s*=", "return ")
   
   local env = get(user.nick)
   return select(2, pcall(sandbox(message,{["env"] = env})))

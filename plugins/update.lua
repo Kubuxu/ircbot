@@ -13,7 +13,7 @@ local function handleGit(message, user, channel)
     return "Nope"
   end
   if message:find("^pull") then
-    return table.concat(build(io.popen("git pull"):lines()), ", ")
+    return table.concat(build(io.popen("git pull && git submodule init && git submodule update && git submodule status"):lines()), ", ")
   end
 end
 hook.new("command_git", handleGit)
