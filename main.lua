@@ -3,7 +3,7 @@ local args = {...}
 local oldpath = package.path
 
 package.path = "./?/?.lua;./?/init.lua;" .. package.path
-package.path = "./Vexatos-Programs/selene/lib/?/?.lua;./Vexatos-Programs/selene/lib/?/init.lua" .. package.path
+package.path = "./Vexatos-Programs/selene/lib/?/?.lua;./Vexatos-Programs/selene/lib/?/init.lua;" .. package.path
 require "irc"
 
 hook = require "hook"
