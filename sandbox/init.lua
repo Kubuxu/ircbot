@@ -85,6 +85,7 @@ selene _selene
 ltype checkType checkFunc parCount lpairs isList
 
 string.foreach string.map string.filter string.drop string.dropwhile string.foldleft string.foldright string.split
+string.take string.takewhile string.takeright
 
 
 ]]):gsub('%S+', function(id)
