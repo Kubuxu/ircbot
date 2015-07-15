@@ -11,9 +11,9 @@ local hooks = {}
 local function str(count, tab)
   local res = ""
   for i = 1, count do
-    res = res .. tostring(tab[i]) .. " , "
+    res = res .. tostring(tab[i]) .. ", "
   end
-  return res:gsub(" , $","")
+  return res:gsub(", $","")
 end
 
 local function countVals(...)
