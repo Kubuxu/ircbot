@@ -26,6 +26,7 @@ end
 
 if not _G._selene then _G._selene = {} end
 _G._selene.liveMode = false
+_G._selene.doAutoload = true
 require("selene")
 
 local modsdir = "./plugins"
